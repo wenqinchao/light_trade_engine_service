@@ -63,10 +63,6 @@ class AddOrderHandler(BaseHandler):
         else:
             deal_info = order_tree.add_sale_order(order_id, price, num, buy_fee, sale_fee)
 
-        # print("sale===================================================================================")
-        # print(order_tree.sale_orders)
-        # print("buy=====================================================================================")
-        # print(order_tree.buy_orders)
 
         redis.set(pair, pickle.dumps(order_tree))
 
@@ -128,6 +124,6 @@ class DelOrderHandler(BaseHandler):
             return self.resp(0, "Order doesn't exist")
         else:
             order_tree = pickle.loads(tree)
-            delete_order = order_tree.del_order(order_id, direction, price)
+            order_tree.del_order(order_id, direction, price)
 
 
