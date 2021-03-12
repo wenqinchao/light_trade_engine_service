@@ -38,10 +38,26 @@ class AddOrderHandler(BaseHandler):
         """
         args = self.get_json_arguments()
         pair = args.get("pair")
-        direction = int(args.get("direction"))
+        if not pair:
+            return self.resp(0, "Pair can not be null")
+        direction = args.get("direction")
+        if not direction:
+            return self.resp(0, "Direction can not be null")
+        direction = int(direction)
+
         order_id = args.get("order_id")
-        price = float(args.get("price"))
-        num = float(args.get("num"))
+        if not order_id:
+            return self.resp(0, "Order id can not be null")
+        
+        price = args.get("price")
+        if not price:
+            return self.resp(0, "Price can not be null")
+        price = float(price)
+
+        num = args.get("num")
+        if not num:
+            return self.resp(0, "Order num can not be null")
+        num = float(num)
         buy_fee = args.get("buy_fee", 0)
         sale_fee = args.get("sale_fee", 0)
 
